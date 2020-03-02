@@ -4,7 +4,7 @@ export const Balance = () => {
   return (
     <>
       <h4>Your Balance</h4>
-      <h1 id="balance">10 Rs</h1>
+      <h1>10 Rs</h1>
     </>
   );
 };
