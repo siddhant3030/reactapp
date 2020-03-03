@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 export const TaskListContext = createContext();
 
 const TaskListContextProvider = () => {
-  useState([
+  const [tasks, setTasks] = useState([
     { task: "Read the book", id: 1 },
     { task: "Read the books", id: 2 },
     { task: "Read the bookss", id: 3 },
