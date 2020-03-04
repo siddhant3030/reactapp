@@ -1,8 +1,13 @@
 import React from "react";
+import TaskList from "./TaskList";
 import "../App.css";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <TaskList />
+    </div>
+  );
 };
 
 export default App;

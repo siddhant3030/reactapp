@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 
 export const TaskListContext = createContext();
 
-const TaskListContextProvider = () => {
+const TaskListContextProvider = props => {
   const [tasks, setTasks] = useState([
     { task: "Read the book", id: 1 },
     { task: "Read the books", id: 2 },
@@ -11,7 +11,11 @@ const TaskListContextProvider = () => {
     { task: "Read the bookssss", id: 5 }
   ]);
 
-  return <div>Task List Context</div>;
+  return (
+    <TaskListContext.Provider value="{{tasks}}">
+      {props.children}
+    </TaskListContext.Provider>
+  );
 };
 
 export default TaskListContextProvider;
