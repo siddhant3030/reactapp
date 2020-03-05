@@ -11,7 +11,7 @@ const Navbar = () => {
           DailyPlug
         </Link>
         <SignedInLinks />
-        <SignedOutLink />
+        <SignedOutLinks />
       </div>
     </nav>
   );
