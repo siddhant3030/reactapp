@@ -16,3 +16,5 @@ const ProjectDetails = () => {
     </div>
   );
 };
+
+export default ProjectDetails;
