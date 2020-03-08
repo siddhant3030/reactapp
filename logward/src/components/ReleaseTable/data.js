@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     version: "Version 4.0",
     status: "IN PROGRESS",
     progress: 51,
@@ -9,6 +10,7 @@ export default [
     action: ""
   },
   {
+    id: 2,
     version: "Version 3.0",
     status: "UNRELEASED",
     progress: 0,
@@ -18,6 +20,7 @@ export default [
     action: ""
   },
   {
+    id: 3,
     version: "Version 1.5",
     status: "UNRELEASED",
     progress: 0,
@@ -27,6 +30,7 @@ export default [
     action: ""
   },
   {
+    id: 4,
     version: "Version 1.3",
     status: "RELEASED",
     progress: 100,
@@ -36,6 +40,7 @@ export default [
     action: ""
   },
   {
+    id: 5,
     version: "Version 1.2",
     status: "RELEASED",
     progress: 100,
@@ -45,6 +50,7 @@ export default [
     action: ""
   },
   {
+    id: 6,
     version: "Version 1.0",
     status: "RELEASED",
     progress: 100,

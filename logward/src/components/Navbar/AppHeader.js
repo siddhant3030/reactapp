@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Typography } from "antd";
-import Appsearch from "./Appsearch";
+import AppSearch from "./AppSearch";
 const { Title, Text } = Typography;
 export default class AppHeader extends Component {
   render() {
@@ -22,8 +22,8 @@ export default class AppHeader extends Component {
               <Button type="primary">RELEASED</Button>
             </div>
           </Col>
-          <Col span={8} offset={8}>
-            <Appsearch />
+          <Col span={8} offset={8} style={{ alignSelf: "flex-end" }}>
+            <AppSearch onSearch={this.props.onSearch} />
           </Col>
         </Row>
       </div>

@@ -1,46 +1,107 @@
 import React, { Component } from "react";
-import { Table } from "antd";
-import tableData from "./data";
-import tableColumn from "./TableColumn";
+import { Table, Tag, Progress, Button, Popconfirm, Typography } from "antd";
 import TableFooter from "./TableFooter";
+import { DeleteOutlined } from "@ant-design/icons";
+import EditModal from "./EditModal";
+
+const { Text } = Typography;
 
 export default class ReleaseTable extends Component {
   constructor() {
     super();
-    this.state = {
-      data: []
-    };
+
+    this.columns = [
+      {
+        title: "Version",
+        dataIndex: "version",
+        key: "version",
+        render: text => <Text strong>{text}</Text>
+      },
+      {
+        title: "Status",
+        dataIndex: "status",
+        key: "status",
+        render: status => {
+          var color = "";
+          if (status === "IN PROGRESS") {
+            color = "blue";
+          } else if (status === "UNRELEASED") {
+            color = "yellow";
+          } else if (status === "RELEASED") {
+            color = "green";
+          }
+          return (
+            <span>
+              <Tag color={color}>{status.toUpperCase()}</Tag>
+            </span>
+          );
+        }
+      },
+      {
+        title: "Progress",
+        dataIndex: "progress",
+        key: "progress",
+        render: percent => (
+          <span>
+            <Progress percent={percent} />
+          </span>
+        )
+      },
+      {
+        title: "StartDate",
+        key: "startdate",
+        dataIndex: "startdate"
+      },
+      {
+        title: "ReleaseDate",
+        key: "releasedate",
+        dataIndex: "releasedate"
+      },
+      {
+        title: "Description",
+        key: "description",
+        dataIndex: "description"
+      },
+      {
+        title: "Action",
+        key: "action",
+        render: record => (
+          <span>
+            <EditModal record={record} />
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => this.props.onReleaseDelete(record.id)}
+            >
+              <Button icon={<DeleteOutlined />}>Delete</Button>
+            </Popconfirm>
+          </span>
+        )
+      }
+    ];
   }
 
-  componentDidMount() {
-    this.setState({ data: tableData });
-  }
-
-  addNewRelease = async release => {
-    console.log("addNewRelease", release);
-
+  addNewRelease = release => {
     let newData = {
+      id: this.props.data.length + 1,
       version: release.version,
       status: release.status,
       progress: release.progress,
-      startdate: "06/12/16",
-      releasedate: "28/09/16",
+      startdate: release.startDate,
+      releasedate: release.endDate,
       description: release.description,
       action: ""
     };
-
-    await this.setState({ data: [...this.state.data, newData] });
-    console.log("data", this.state.data);
+    this.props.onReleaseAdd(newData);
   };
 
   render() {
-    const columns = tableColumn;
-    console.log("data::render", this.state.data);
+    const columns = this.columns;
+    console.log("columns", columns);
 
     return (
       <Table
         columns={columns}
-        dataSource={this.state.data}
+        dataSource={this.props.data}
         footer={() => <TableFooter onAdd={this.addNewRelease} />}
       />
     );
