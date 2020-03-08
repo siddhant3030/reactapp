@@ -1,9 +1,15 @@
 import React from "react";
-import logo from "./logo.svg";
+import Navbar from "./components/Navbar.js";
 import "./App.css";
+import ReleaseTable from "./components/ReleaseTable.js";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Navbar />
+      <ReleaseTable />
+    </div>
+  );
 }
 
 export default App;
