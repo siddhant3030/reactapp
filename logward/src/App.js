@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./components/Navbar.js";
+import Navbar from "./components/Navbar";
 import "./App.css";
-import ReleaseTable from "./components/ReleaseTable.js";
+import ReleaseTable from "./components/ReleaseTable";
 
 function App() {
   return (

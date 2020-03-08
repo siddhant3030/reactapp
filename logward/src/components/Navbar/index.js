@@ -12,7 +12,6 @@ export default class Navbar extends Component {
         <Content>
           <AppHeader />
         </Content>
-        {/* <Footer>Footer</Footer> */}
       </Layout>
     );
   }
