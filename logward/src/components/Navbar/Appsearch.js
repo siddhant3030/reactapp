@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input } from "antd";
+import { Input, AutoComplete } from "antd";
 const { Search } = Input;
 
 export default class Appsearch extends Component {
@@ -15,11 +15,15 @@ export default class Appsearch extends Component {
   };
   render() {
     return (
-      <Search
-        placeholder="Search..."
+      <AutoComplete
+        style={{
+          width: 200
+        }}
         onSearch={this.props.onSearch}
-        size="large"
+        placeholder="control mode"
       />
     );
   }
 }
+
+/* <Search placeholder="Search..." onSearch={this.props.onSearch} size="large" />; */
