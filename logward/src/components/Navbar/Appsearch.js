@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Input, AutoComplete } from "antd";
-const { Search } = Input;
+import { AutoComplete } from "antd";
 
 export default class Appsearch extends Component {
   constructor() {
@@ -10,17 +9,14 @@ export default class Appsearch extends Component {
     };
   }
 
-  handleSearch = value => {
-    console.log(value);
-  };
   render() {
     return (
       <AutoComplete
         style={{
-          width: 200
+          width: 400
         }}
         onSearch={this.props.onSearch}
-        placeholder="control mode"
+        placeholder="Search.."
       />
     );
   }

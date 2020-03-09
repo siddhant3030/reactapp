@@ -13,13 +13,26 @@ export default class AppHeader extends Component {
               Releases
             </Title>
             <div>
-              <Button type="primary" style={{ marginRight: 20 }}>
+              <Button
+                type="primary"
+                style={{ marginRight: 20 }}
+                onClick={() => this.props.filterRow("IN PROGRESS")}
+              >
                 IN PROGRESS
               </Button>
-              <Button type="primary" style={{ marginRight: 20 }}>
+              <Button
+                type="primary"
+                style={{ marginRight: 20 }}
+                onClick={() => this.props.filterRow("UNRELEASED")}
+              >
                 UNRELEASED
               </Button>
-              <Button type="primary">RELEASED</Button>
+              <Button
+                type="primary"
+                onClick={() => this.props.filterRow("RELEASED")}
+              >
+                RELEASED
+              </Button>
             </div>
           </Col>
           <Col span={8} offset={8} style={{ alignSelf: "flex-end" }}>

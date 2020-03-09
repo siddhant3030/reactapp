@@ -10,7 +10,6 @@ import {
   message
 } from "antd";
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
-import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
