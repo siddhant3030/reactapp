@@ -56,12 +56,19 @@ export default class App extends Component {
     this.setState({ filteredData: filteredData });
   };
 
+  filterRow = val => {
+    console.log("value", val);
+    this.setState({
+      filteredData: [...this.state.data].filter(item => item.status === val)
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <Layout style={{ backgroundColor: "white", margin: 40 }}>
           <div style={{ marginBottom: 25 }}>
-            <AppHeader onSearch={this.search} />
+            <AppHeader onSearch={this.search} filterRow={this.filterRow} />
           </div>
 
           <ReleaseTable
