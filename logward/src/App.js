@@ -30,9 +30,20 @@ export default class App extends Component {
     });
   };
 
-  editRelease = data => {
-    console.log("editRelease", data);
+  editRelease = (id, row) => {
+    const newData = [...this.state.data];
+    const index = newData.findIndex(item => id === item.id);
+
+    if (index > -1) {
+      const item = newData[index];
+      newData.splice(index, 1, { ...item, ...row });
+      this.setState({ data: newData });
+    } else {
+      newData.push(row);
+      this.setState({ data: newData });
+    }
   };
+
   search = val => {
     let data = this.state.data;
     let filteredData = data.filter(item => {

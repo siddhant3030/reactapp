@@ -1,88 +1,215 @@
-import React, { Component } from "react";
-import { Table, Tag, Progress, Button, Popconfirm, Typography } from "antd";
+import React, { useState } from "react";
+import {
+  Table,
+  Tag,
+  Progress,
+  Button,
+  Popconfirm,
+  Typography,
+  Form,
+  InputNumber,
+  Input,
+  Select,
+  DatePicker
+} from "antd";
+import { EditOutlined } from "@ant-design/icons";
 import TableFooter from "./TableFooter";
 import { DeleteOutlined } from "@ant-design/icons";
 import EditModal from "./EditModal";
+import moment from "moment";
 
 const { Text } = Typography;
+const { Option } = Select;
 
-export default class ReleaseTable extends Component {
-  constructor() {
-    super();
+const EditableCell = ({
+  editing,
+  dataIndex,
+  title,
+  inputType,
+  record,
+  index,
+  children,
+  ...restProps
+}) => {
+  const inputNode = inputType;
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{
+            margin: 0
+          }}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`
+            }
+          ]}
+        >
+          {inputNode}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
+};
 
-    this.columns = [
-      {
-        title: "Version",
-        dataIndex: "version",
-        key: "version",
-        render: text => <Text strong>{text}</Text>
-      },
-      {
-        title: "Status",
-        dataIndex: "status",
-        key: "status",
-        render: status => {
-          var color = "";
-          if (status === "IN PROGRESS") {
-            color = "blue";
-          } else if (status === "UNRELEASED") {
-            color = "yellow";
-          } else if (status === "RELEASED") {
-            color = "green";
-          }
-          return (
-            <span>
-              <Tag color={color}>{status.toUpperCase()}</Tag>
-            </span>
-          );
+const ReleaseTable = props => {
+  console.log("props", props.data);
+  const [form] = Form.useForm();
+  const [editingId, setEditingId] = useState("");
+
+  const isEditing = record => record.id === editingId;
+
+  const edit = record => {
+    form.setFieldsValue({ ...record });
+    setEditingId(record.id);
+  };
+
+  const cancel = () => {
+    setEditingId("");
+  };
+
+  const save = async id => {
+    const row = await form.getFieldValue();
+    console.log("id", id, row);
+    props.onReleaseEdit(id, row);
+    setEditingId("");
+  };
+
+  const columns = [
+    {
+      title: "Version",
+      dataIndex: "version",
+      key: "version",
+      editable: true,
+      inputType: <Input />,
+      render: text => <Text strong>{text}</Text>
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      inputType: (
+        <Select defaultValue="UNRELEASED">
+          <Option value="UNRELEASED">Unreleased</Option>
+          <Option value="IN PROGRESS">In Progress</Option>
+          <Option value="RELEASED">Released</Option>
+        </Select>
+      ),
+      editable: true,
+      render: status => {
+        var color = "";
+        if (status === "IN PROGRESS") {
+          color = "blue";
+        } else if (status === "UNRELEASED") {
+          color = "yellow";
+        } else if (status === "RELEASED") {
+          color = "green";
         }
-      },
-      {
-        title: "Progress",
-        dataIndex: "progress",
-        key: "progress",
-        render: percent => (
+        return (
           <span>
-            <Progress percent={percent} />
+            <Tag color={color}>{status.toUpperCase()}</Tag>
           </span>
-        )
-      },
-      {
-        title: "StartDate",
-        key: "startdate",
-        dataIndex: "startdate"
-      },
-      {
-        title: "ReleaseDate",
-        key: "releasedate",
-        dataIndex: "releasedate"
-      },
-      {
-        title: "Description",
-        key: "description",
-        dataIndex: "description"
-      },
-      {
-        title: "Action",
-        key: "action",
-        render: record => (
+        );
+      }
+    },
+    {
+      title: "Progress",
+      dataIndex: "progress",
+      key: "progress",
+      editable: true,
+      inputType: <InputNumber min={0} max={100} defaultValue={0} />,
+      render: percent => (
+        <span>
+          <Progress percent={percent} />
+        </span>
+      )
+    },
+    {
+      title: "StartDate",
+      key: "startdate",
+      dataIndex: "startdate",
+      inputType: <Input />,
+      editable: true
+    },
+    {
+      title: "ReleaseDate",
+      key: "releasedate",
+      dataIndex: "releasedate",
+      inputType: <Input />,
+      editable: true
+    },
+    {
+      title: "Description",
+      key: "description",
+      dataIndex: "description",
+      inputType: <Input />,
+      editable: true
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
           <span>
-            <EditModal record={record} />
+            <a
+              onClick={() => save(record.id)}
+              style={{
+                marginRight: 8
+              }}
+            >
+              Save
+            </a>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <span>
+            <Button
+              style={{ marginRight: 10 }}
+              icon={<EditOutlined />}
+              disabled={editingId !== ""}
+              onClick={() => edit(record)}
+            >
+              Edit
+            </Button>
             <Popconfirm
               title="Sure to delete?"
-              onConfirm={() => this.props.onReleaseDelete(record.id)}
+              onConfirm={() => props.onReleaseDelete(record.id)}
             >
               <Button icon={<DeleteOutlined />}>Delete</Button>
             </Popconfirm>
           </span>
-        )
+        );
       }
-    ];
-  }
+    }
+  ];
 
-  addNewRelease = release => {
+  const mergedColumns = columns.map(col => {
+    if (!col.editable) {
+      return col;
+    }
+
+    return {
+      ...col,
+      onCell: record => ({
+        record,
+        inputType: col.inputType,
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record)
+      })
+    };
+  });
+
+  const addNewRelease = release => {
     let newData = {
-      id: this.props.data.length + 1,
+      id: props.data.length + 1,
       version: release.version,
       status: release.status,
       progress: release.progress,
@@ -91,19 +218,23 @@ export default class ReleaseTable extends Component {
       description: release.description,
       action: ""
     };
-    this.props.onReleaseAdd(newData);
+    props.onReleaseAdd(newData);
   };
 
-  render() {
-    const columns = this.columns;
-    console.log("columns", columns);
-
-    return (
+  return (
+    <Form form={form} component={false}>
       <Table
-        columns={columns}
-        dataSource={this.props.data}
-        footer={() => <TableFooter onAdd={this.addNewRelease} />}
+        components={{
+          body: {
+            cell: EditableCell
+          }
+        }}
+        columns={mergedColumns}
+        dataSource={props.data}
+        footer={() => <TableFooter onAdd={addNewRelease} />}
       />
-    );
-  }
-}
+    </Form>
+  );
+};
+
+export default ReleaseTable;
