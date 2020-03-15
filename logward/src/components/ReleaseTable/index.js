@@ -15,8 +15,6 @@ import {
 import { EditOutlined } from "@ant-design/icons";
 import TableFooter from "./TableFooter";
 import { DeleteOutlined } from "@ant-design/icons";
-import EditModal from "./EditModal";
-import moment from "moment";
 
 const { Text } = Typography;
 const { Option } = Select;
