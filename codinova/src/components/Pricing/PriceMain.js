@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddPrice from "./AddPrice";
 
 export default class PriceMain extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class PriceMain extends Component {
             <a href="about.asp">Title</a>
           </li>
         </ul>
+        <AddPrice />
       </div>
     );
   }
