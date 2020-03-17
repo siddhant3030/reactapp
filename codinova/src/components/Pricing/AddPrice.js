@@ -20,7 +20,7 @@ class AddPrice extends Component {
                 <button>+</button>
               </li>
               <li>
-                <a>{cart.description}</a>
+                <a>{}</a>
               </li>
             </ul>
           );
