@@ -1,6 +1,6 @@
 export default [
   {
-    name: "comuter",
+    name: "computer",
     price: "130",
     category: "computers",
     description: "",
