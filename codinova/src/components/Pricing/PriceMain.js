@@ -17,7 +17,7 @@ export default class PriceMain extends Component {
             <a href="contact.asp">Quantity</a>
           </li>
           <li>
-            <a href="about.asp">Title</a>
+            <a href="about.asp">Total</a>
           </li>
         </ul>
         <AddPrice />
