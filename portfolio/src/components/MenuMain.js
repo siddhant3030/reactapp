@@ -9,7 +9,7 @@ export default class MenuMain extends Component {
         theme="dark"
         defaultSelectedKeys={["1"]}
         mode="inline"
-        style={{ backgroundColor: "black" }}
+        style={{ backgroundColor: "#222629" }}
       >
         <Menu.Item key="1">
           <HomeOutlined />
