@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AddPrice from "./AddPrice";
+import TablePrice from "./TablePrice";
 
 export default class PriceMain extends Component {
   render() {
@@ -20,6 +21,7 @@ export default class PriceMain extends Component {
           </li>
         </ul>
         <AddPrice />
+        <TablePrice style={{ paddingBottom: 50 }} />
       </div>
     );
   }
