@@ -97,3 +97,8 @@ li a:hover {
   margin-left: 40px;
   border-radius: 6px;
 }
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+}
