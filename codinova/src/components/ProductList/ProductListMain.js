@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import List from "./List.js";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
+import Rgb from "./Rgb.js";
 class ProductListMain extends Component {
   render() {
-    console.log("this.props", this.props);
     // items = [];
     return (
       <div className="split right">
         <div className="product-container">
-          {List.map((item, key) => {
+          {List.map((item, index) => {
             const image = item.image
               ? require(`../../images/${item.image}`)
               : "https://via.placeholder.com/150";
             return (
-              <>
+              <React.Fragment key={index}>
                 {image && (
                   <div
                     onClick={() => this.props.addToCart(item)}
@@ -68,7 +68,7 @@ class ProductListMain extends Component {
                     </div>
                   </div>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </div>

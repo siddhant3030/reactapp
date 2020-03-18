@@ -1,26 +1,40 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity
+} from "../../actions/cart.js";
+
 class AddPrice extends Component {
   render() {
     console.log("props", this.props.cartItems);
     return (
       <>
-        {this.props.cartItems.map(cart => {
+        {this.props.cartItems.map((item, index) => {
           return (
-            <ul className="addPrice">
+            <ul className="addPrice" key={index}>
               <li>
-                <a>{cart.name}</a>
+                <a>{item.name}</a>
               </li>
               <li>
-                <a>{cart.price}</a>
+                <a>{item.price}</a>
               </li>
               <li>
-                <button>-</button>
-                <button></button>
-                <button>+</button>
+                <button
+                  onClick={() => {
+                    this.props.decreaseQuantity(item.name);
+                  }}
+                >
+                  -
+                </button>
+                <button>{item.qty}</button>
+                <button onClick={() => this.props.increaseQuantity(item.name)}>
+                  +
+                </button>
               </li>
               <li>
-                <a>{}</a>
+                <a>{item.qty * item.price}</a>
               </li>
             </ul>
           );
@@ -32,8 +46,12 @@ class AddPrice extends Component {
 
 const mapStateToProps = state => {
   return {
-    cartItems: state.cart
+    cartItems: state.cart.items
   };
 };
 
-export default connect(mapStateToProps)(AddPrice);
+export default connect(mapStateToProps, {
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity
+})(AddPrice);

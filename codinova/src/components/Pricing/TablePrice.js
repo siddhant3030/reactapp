@@ -1,7 +1,19 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class TablePrice extends Component {
+class TablePrice extends Component {
   render() {
+    const subTotal =
+      this.props.cartItems.length > 0
+        ? this.props.cartItems.reduce(
+            (a, b) => a + parseInt(b.price * b.qty),
+            0
+          )
+        : 0;
+    const discount = (subTotal * 0.1).toFixed(2);
+    const vat = (subTotal * 0.1).toFixed(2);
+    const items = this.props.cartItems.length;
+    const total = (subTotal - discount - vat).toFixed(2);
     return (
       <>
         <div style={{ margin: 35 }}>
@@ -14,25 +26,27 @@ export default class TablePrice extends Component {
               // marginRight: 20,
             }}
           >
-            <tr>
-              <th>SubTotal</th>
-              <th>4000 RS</th>
-              <th>0 Items</th>
-            </tr>
-            <tr>
-              <td>VAT</td>
-              <td>10%</td>
-              <td>0.000</td>
-            </tr>
-            <tr>
-              <td>Discount</td>
-              <td>10%</td>
-              <td>0.000</td>
-            </tr>
-            <tr>
-              <td>Total</td>
-              <td>0.000 Eur</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>SubTotal</td>
+                <td>{subTotal}</td>
+                <td>{items} items</td>
+              </tr>
+              <tr>
+                <td>VAT</td>
+                <td>10%</td>
+                <td>{vat}</td>
+              </tr>
+              <tr>
+                <td>Discount</td>
+                <td>10%</td>
+                <td>{discount}</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>{total} Rs</td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div className="buttonParent">
@@ -43,3 +57,11 @@ export default class TablePrice extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    cartItems: state.cart.items
+  };
+};
+
+export default connect(mapStateToProps)(TablePrice);
