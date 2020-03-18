@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Modal from "../Modal";
 
 class TablePrice extends Component {
+  state = {
+    show: false
+  };
+  showModal = e => {
+    this.setState({
+      show: !this.state.show
+    });
+  };
   render() {
     const subTotal =
       this.props.cartItems.length > 0
@@ -51,6 +60,22 @@ class TablePrice extends Component {
           <button className="buttonSale">PROCESS SALE</button>
           <button className="buttonSalen">CANCEL SALE</button>
         </div>
+        <button
+          class="toggle-button"
+          id="centered-toggle-button"
+          onClick={e => {
+            this.showModal(e);
+          }}
+        >
+          {" "}
+          show Modal{" "}
+        </button>
+        <Modal onClose={this.showModal} show={this.state.show}>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
+          deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non
+          fuga omnis a sed impedit explicabo accusantium nihil doloremque
+          consequuntur.
+        </Modal>
         {/* <div class="modal-content">
           <span class="close">&times;</span>
           <p>Some text in the Modal..</p>

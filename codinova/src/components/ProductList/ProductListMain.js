@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import List from "./List.js";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cart";
-import Rgb from "./Rgb.js";
+
 class ProductListMain extends Component {
+  constructor() {
+    super();
+    this.state = {
+      price: null,
+      description: null
+    };
+  }
   render() {
-    // items = [];
     return (
       <div className="split right">
         <div className="product-container">
@@ -27,6 +33,13 @@ class ProductListMain extends Component {
                       borderRadius: 20
                       // opacity: 0.5
                     }}
+                    onMouseOver={() =>
+                      this.setState({
+                        price: item.price,
+                        name: item.name,
+                        description: item.description
+                      })
+                    }
                   >
                     <div
                       style={{
@@ -55,7 +68,9 @@ class ProductListMain extends Component {
                           paddingLeft: 35
                         }}
                       >
-                        {item.price}
+                        {this.state.name === item.name && (
+                          <span>{this.state.price} Rs</span>
+                        )}
                       </h4>
                       <h4
                         style={{
@@ -64,7 +79,7 @@ class ProductListMain extends Component {
                           paddingLeft: 14
                         }}
                       >
-                        {item.description}
+                        {this.state.name == item.name && this.state.description}
                       </h4>
                     </div>
                   </div>
