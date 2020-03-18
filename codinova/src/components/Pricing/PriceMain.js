@@ -6,8 +6,8 @@ export default class PriceMain extends Component {
   render() {
     return (
       <div className="split left">
-        <ul style={{ marginLeft: 25 }}>
-          <li>
+        <ul style={{ marginLeft: 150 }}>
+          <li style={{ marginRight: 10 }}>
             <a>Product</a>
           </li>
           <li>
@@ -16,7 +16,7 @@ export default class PriceMain extends Component {
           <li>
             <a>Quantity</a>
           </li>
-          <li>
+          <li style={{ marginLeft: 50 }}>
             <a>Total</a>
           </li>
         </ul>

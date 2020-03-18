@@ -24,15 +24,16 @@ class ProductListMain extends Component {
                       margin: 15,
                       width: 100,
                       height: 100,
-                      borderRadius: 10
+                      borderRadius: 20
                       // opacity: 0.5
                     }}
                   >
                     <div
                       style={{
-                        backgroundColor: "rgba(255, 0, 0, 0.5)",
+                        backgroundColor: `${item.rgb}`,
                         width: 100,
-                        height: 100
+                        height: 100,
+                        borderRadius: 10
                       }}
                     >
                       <h4

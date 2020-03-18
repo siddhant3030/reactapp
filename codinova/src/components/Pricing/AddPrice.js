@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import {
   addToCart,
   increaseQuantity,
-  decreaseQuantity
+  decreaseQuantity,
+  deleteProduct
 } from "../../actions/cart.js";
 
 class AddPrice extends Component {
@@ -34,6 +35,9 @@ class AddPrice extends Component {
             <ul className="addPrice" key={index}>
               <li>
                 <button
+                  onClick={() => {
+                    this.props.deleteProduct(item.name);
+                  }}
                   style={{
                     borderRadius: 50,
                     backgroundColor: "red",
@@ -59,7 +63,7 @@ class AddPrice extends Component {
                   style={{
                     marginTop: 13,
                     backgroundColor: "#b3b3b3",
-                    borderRadius: 10,
+                    borderRadius: 5,
                     color: "white"
                   }}
                 >
@@ -71,7 +75,7 @@ class AddPrice extends Component {
                   style={{
                     marginTop: 13,
                     backgroundColor: "#b3b3b3",
-                    borderRadius: 10,
+                    borderRadius: 5,
                     color: "white"
                   }}
                 >
@@ -98,5 +102,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   addToCart,
   increaseQuantity,
-  decreaseQuantity
+  decreaseQuantity,
+  deleteProduct
 })(AddPrice);

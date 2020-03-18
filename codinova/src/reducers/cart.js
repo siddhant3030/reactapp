@@ -6,15 +6,21 @@ const cart = (state = initState, action) => {
   let foundIndex;
   let filteredItems;
   let productName;
-  let foundItem;
   switch (action.type) {
     case "ADD_TO_CART":
       let newItem = action.payload;
       newItem["qty"] = newItem["qty"] ? parseInt(newItem["qty"]) + 1 : 1;
-      filteredItems = currentItems.filter(item => item.name !== newItem.name);
+      foundIndex = currentItems.findIndex(item => item.name == newItem.name);
+      console.log("foo", foundIndex);
+      if (foundIndex !== -1) {
+        currentItems[foundIndex] = newItem;
+      } else {
+        currentItems.push(newItem);
+      }
+
       return {
         ...state,
-        items: [...filteredItems, newItem]
+        items: [...currentItems]
       };
     case "INCREASE_QTY":
       productName = action.payload;
@@ -35,7 +41,14 @@ const cart = (state = initState, action) => {
         ...state,
         items: [...currentItems]
       };
-
+    case "DELETE_PRODUCT":
+      productName = action.payload;
+      foundIndex = currentItems.findIndex(item => item.name == productName);
+      currentItems.splice(foundIndex, 1);
+      return {
+        ...state,
+        items: [...currentItems]
+      };
     default:
       return state;
   }

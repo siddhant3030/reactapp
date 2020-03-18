@@ -17,3 +17,8 @@ export const deleteFromCart = product => ({
   type: "DELETE_TO_CART",
   payload: product
 });
+
+export const deleteProduct = productName => ({
+  type: "DELETE_PRODUCT",
+  payload: productName
+});

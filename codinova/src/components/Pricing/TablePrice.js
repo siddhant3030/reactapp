@@ -26,18 +26,18 @@ class TablePrice extends Component {
           >
             <tbody>
               <tr>
-                <td>SubTotal</td>
+                <td style={{ color: "green" }}>SubTotal</td>
                 <td>{subTotal} Rs</td>
                 <td>{items} items</td>
               </tr>
               <tr>
                 <td>VAT</td>
-                <td>10%</td>
+                <td style={{ color: "red" }}>10%</td>
                 <td>{vat}</td>
               </tr>
               <tr>
                 <td>Discount</td>
-                <td>10%</td>
+                <td style={{ color: "red" }}>10%</td>
                 <td>{discount}</td>
               </tr>
               <tr>
