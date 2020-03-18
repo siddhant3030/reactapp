@@ -8,6 +8,7 @@ const cart = (state = initState, action) => {
   let productName;
   switch (action.type) {
     case "ADD_TO_CART":
+      console.log("add to cart");
       let newItem = action.payload;
       newItem["qty"] = newItem["qty"] ? parseInt(newItem["qty"]) + 1 : 1;
       foundIndex = currentItems.findIndex(item => item.name == newItem.name);
@@ -49,6 +50,8 @@ const cart = (state = initState, action) => {
         ...state,
         items: [...currentItems]
       };
+    case "RESET_CART":
+      return { ...state, items: [] };
     default:
       return state;
   }

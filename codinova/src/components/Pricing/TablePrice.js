@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
+import { resetCart } from "../../actions/cart";
 
 class TablePrice extends Component {
   state = {
@@ -21,7 +22,10 @@ class TablePrice extends Component {
         : 0;
     const discount = (subTotal * 0.1).toFixed(2);
     const vat = (subTotal * 0.1).toFixed(2);
-    const items = this.props.cartItems.length;
+    const items =
+      this.props.cartItems.length > 0
+        ? this.props.cartItems.reduce((a, b) => a + parseInt(b.qty), 0)
+        : 0;
     const total = (subTotal - discount - vat).toFixed(2);
     return (
       <div>
@@ -57,29 +61,23 @@ class TablePrice extends Component {
           </table>
         </div>
         <div className="buttonParent">
-          <button className="buttonSale">PROCESS SALE</button>
-          <button className="buttonSalen">CANCEL SALE</button>
+          <button
+            className="buttonSale"
+            disabled={this.props.cartItems.length > 0 ? false : true}
+            onClick={e => this.showModal(e)}
+          >
+            PROCESS SALE
+          </button>
+          <button
+            className="buttonSalen"
+            onClick={() => {
+              this.props.resetCart();
+            }}
+          >
+            CANCEL SALE
+          </button>
         </div>
-        <button
-          class="toggle-button"
-          id="centered-toggle-button"
-          onClick={e => {
-            this.showModal(e);
-          }}
-        >
-          {" "}
-          show Modal{" "}
-        </button>
-        <Modal onClose={this.showModal} show={this.state.show}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
-          deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non
-          fuga omnis a sed impedit explicabo accusantium nihil doloremque
-          consequuntur.
-        </Modal>
-        {/* <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>Some text in the Modal..</p>
-        </div> */}
+        <Modal onClose={this.showModal} show={this.state.show}></Modal>
       </div>
     );
   }
@@ -91,4 +89,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TablePrice);
+export default connect(mapStateToProps, { resetCart })(TablePrice);

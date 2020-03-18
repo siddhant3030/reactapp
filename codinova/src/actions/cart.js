@@ -22,3 +22,6 @@ export const deleteProduct = productName => ({
   type: "DELETE_PRODUCT",
   payload: productName
 });
+export const resetCart = () => ({
+  type: "RESET_CART"
+});
