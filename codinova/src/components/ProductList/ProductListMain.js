@@ -72,8 +72,6 @@ class ProductListMain extends Component {
             );
           })}
         </div>
-
-        {/* <button className="productButton">Product</button> */}
       </div>
     );
   }

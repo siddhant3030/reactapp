@@ -15,21 +15,19 @@ class TablePrice extends Component {
     const items = this.props.cartItems.length;
     const total = (subTotal - discount - vat).toFixed(2);
     return (
-      <>
+      <div>
         <div style={{ margin: 35 }}>
           <table
             className="customerTable"
             id="customers"
             style={{
-              marginTop: 400
-              // marginLeft: 20,
-              // marginRight: 20,
+              marginTop: 500
             }}
           >
             <tbody>
               <tr>
                 <td>SubTotal</td>
-                <td>{subTotal}</td>
+                <td>{subTotal} Rs</td>
                 <td>{items} items</td>
               </tr>
               <tr>
@@ -44,7 +42,7 @@ class TablePrice extends Component {
               </tr>
               <tr>
                 <td>Total</td>
-                <td>{total} Rs</td>
+                <td style={{ color: "green" }}>{total} Rs</td>
               </tr>
             </tbody>
           </table>
@@ -53,7 +51,11 @@ class TablePrice extends Component {
           <button className="buttonSale">PROCESS SALE</button>
           <button className="buttonSalen">CANCEL SALE</button>
         </div>
-      </>
+        {/* <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Some text in the Modal..</p>
+        </div> */}
+      </div>
     );
   }
 }
