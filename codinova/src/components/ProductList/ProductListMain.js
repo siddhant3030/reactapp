@@ -79,7 +79,8 @@ class ProductListMain extends Component {
                           paddingLeft: 14
                         }}
                       >
-                        {this.state.name == item.name && this.state.description}
+                        {this.state.name === item.name &&
+                          this.state.description}
                       </h4>
                     </div>
                   </div>

@@ -16,9 +16,9 @@ class AddPrice extends Component {
         <div
           style={{
             background: "white",
-            fontSize: 30,
-            Color: "#bfbfbf",
-            paddingLeft: 50,
+            fontSize: 25,
+            color: "gray",
+            paddingLeft: 100,
             paddingTop: 10,
             paddingBottom: 10,
             margin: 10

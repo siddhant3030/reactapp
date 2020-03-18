@@ -34,7 +34,7 @@ class TablePrice extends Component {
             className="customerTable"
             id="customers"
             style={{
-              marginTop: 500
+              marginTop: 350
             }}
           >
             <tbody>
