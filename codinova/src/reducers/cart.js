@@ -7,11 +7,10 @@ const cart = (state = initState, action) => {
   let productName;
   switch (action.type) {
     case "ADD_TO_CART":
-      console.log("add to cart");
       let newItem = action.payload;
       newItem["qty"] = newItem["qty"] ? parseInt(newItem["qty"]) + 1 : 1;
       foundIndex = currentItems.findIndex(item => item.name === newItem.name);
-      console.log("foo", foundIndex);
+
       if (foundIndex !== -1) {
         currentItems[foundIndex] = newItem;
       } else {
