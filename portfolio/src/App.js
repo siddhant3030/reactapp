@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import LayoutMain from "./components/LayoutMain";
+import MainLayout from "./components/Layout/MainLayout.js";
 import "./App.css";
 
 export default class app extends Component {
   render() {
-    return <LayoutMain />;
+    return <MainLayout />;
   }
 }

@@ -1,19 +1,4 @@
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ant-layout-sider-trigger {
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  height: 48px;
-  color: #fff;
-  line-height: 48px;
-  text-align: center;
-  background: #86c232;
-  cursor: pointer;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+.header {
+  padding: 100px;
+  background-color: black;
 }
