@@ -21,7 +21,7 @@ export default class PriceMain extends Component {
           </li>
         </ul>
         <AddPrice />
-        <TablePrice style={{ paddingBottom: 50 }} />
+        <TablePrice />
       </div>
     );
   }
