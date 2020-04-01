@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Typography } from "antd";
-import AppSearch from "./AppSearch";
+import AppSearch from "./Appsearch.js";
 const { Title, Text } = Typography;
 export default class AppHeader extends Component {
   render() {
